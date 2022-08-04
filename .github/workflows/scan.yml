@@ -12,7 +12,7 @@ jobs:
         id: build-image
         shell: bash
         run: |
-          echo "::set-output name=image-tag::$(make image-tag)"
+          echo "::set-output name=image-tag::$$(echo $(sed -n 2p docker/emissary.docker.tag.remote))"
 
   Aqua-Trivy-Scan:
     runs-on: ubuntu-latest
