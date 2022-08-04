@@ -1,2 +1,2 @@
 sha256:046bfc0d943302c7b4a4f6e2e5d286fa4e5f33839463f619a7fbed14015c5cae
-docker.io/datawire/emissary:3.1.0
+docker.io/emissaryingress/emissary:3.1.0
