@@ -13,13 +13,13 @@ jobs:
         shell: bash
         run: |
           ls docker
-          echo "::set-output name=image-tag::$$(echo $(sed -n 2p docker/emissary.docker.tag.remote))"
+          echo "::set-output name=image-tag::$(echo $(sed -n 2p docker/emissary.docker.tag.remote))"
 
   Aqua-Trivy-Scan:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - name: What is my tag
+      - name: "Log image-tag"
         shell: bash
         run: echo ${{needs.build.outputs.image-tag}}
       - name: Run Trivy vulnerability scanner
@@ -39,6 +39,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
+      - name: "Log image-tag"
+        shell: bash
+        run: echo ${{needs.build.outputs.image-tag}}
       - name: Scan image
         id: scan
         uses: anchore/scan-action@v3
