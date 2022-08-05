@@ -52,7 +52,7 @@ jobs:
         env:
           DEV_REGISTRY: ${{ secrets.DEV_REGISTRY }}
         with:
-          image: "$DEV_REGISTRY/emissary:${{needs.build.outputs.image-tag}}"
+          image: "${{secrets.DEV_REGISTRY}}/emissary:${{needs.build.outputs.image-tag}}"
           acs-report-enable: true
           fail-build: false
       - name: Upload scan results to Github
