@@ -13,7 +13,7 @@ jobs:
         shell: bash
         run: |
           ls docker
-          echo "::set-output name=image-tag::$(echo $(sed -n 2p docker/emissary.docker.tag.remote))"
+          echo "::set-output name=image-tag::$(sed -n 2p docker/emissary.docker.tag.remote)"
 
   Aqua-Trivy-Scan:
     runs-on: ubuntu-latest
