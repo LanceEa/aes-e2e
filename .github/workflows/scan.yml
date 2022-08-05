@@ -27,7 +27,7 @@ jobs:
         env:
           DEV_REGISTRY: ${{ secrets.DEV_REGISTRY }}
         with:
-          image-ref: "$DEV_REGISTRY/emissary:${{needs.build.outputs.image-tag}}"
+          image-ref: "${DEV_REGISTRY}/emissary:${{needs.build.outputs.image-tag}}"
           format: 'sarif'
           output: 'trivy-results.sarif'
           ignore-unfixed: true
