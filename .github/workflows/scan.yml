@@ -13,7 +13,7 @@ jobs:
         shell: bash
         run: |
           ls docker
-          echo "::set-output name=image-tag::$(sed -n 2p docker/emissary.docker.tag.remote)"
+          echo "::set-output name=image-tag::$(tools/build/)"
 
   Aqua-Trivy-Scan:
     runs-on: ubuntu-latest
@@ -25,7 +25,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{needs.build.outputs.image-tag}}
+          image-ref: "$DEV_REGISTRY/emissary:${{needs.build.outputs.image-tag}}"
           format: 'sarif'
           output: 'trivy-results.sarif'
           ignore-unfixed: true
@@ -46,7 +46,7 @@ jobs:
         id: scan
         uses: anchore/scan-action@v3
         with:
-          image: ${{needs.build.outputs.image-tag}}
+          image: "$DEV_REGISTRY/emissary:${{needs.build.outputs.image-tag}}"
           acs-report-enable: true
           fail-build: false
       - name: Upload scan results to Github
