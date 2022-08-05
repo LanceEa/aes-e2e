@@ -13,7 +13,7 @@ jobs:
         shell: bash
         run: |
           ls docker
-          echo "::set-output name=image-tag::$(tools/build/)"
+          echo "::set-output name=image-tag::$(tools/build/version.sh)"
 
   Aqua-Trivy-Scan:
     runs-on: ubuntu-latest
