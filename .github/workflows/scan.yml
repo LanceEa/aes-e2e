@@ -24,6 +24,8 @@ jobs:
         run: echo ${{needs.build.outputs.image-tag}}
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
+        env:
+          DEV_REGISTRY: ${{ secrets.DEV_REGISTRY }}
         with:
           image-ref: "$DEV_REGISTRY/emissary:${{needs.build.outputs.image-tag}}"
           format: 'sarif'
@@ -45,6 +47,8 @@ jobs:
       - name: Scan image
         id: scan
         uses: anchore/scan-action@v3
+        env:
+          DEV_REGISTRY: ${{ secrets.DEV_REGISTRY }}
         with:
           image: "$DEV_REGISTRY/emissary:${{needs.build.outputs.image-tag}}"
           acs-report-enable: true
